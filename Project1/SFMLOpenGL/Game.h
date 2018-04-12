@@ -44,11 +44,14 @@ private:
 	void render();
 	void unload();
 
+	int m_scoreText=0;
+	int m_livesText = 3;
 	double x_moved;
 	bool m_spacePressed = false;
 	int m_spacePressedTimer = 500;
 	sf::RectangleShape m_playerSquare;
 	sf::RectangleShape m_targetSquare;
+	int m_gameOverTimer = 2000;
 };
 
 #endif  // ! GAME_H

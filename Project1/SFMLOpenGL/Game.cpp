@@ -80,10 +80,13 @@ void Game::run()
 #if (DEBUG >= 2)
 		DEBUG_MSG("Game running...");
 #endif
-
+		if (m_gameOverTimer < 0)
+		{
+			isRunning = false;
+		}
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
+			if (event.type == Event::Closed )
 			{
 				isRunning = false;
 			}
@@ -410,17 +413,34 @@ void Game::update()
 	model[0] = rotate(model[0], -0.001f, glm::vec3(0, 1, 0)); // Rotate
 	model[1] = rotate(model[1], -0.001f, glm::vec3(0, 1, 0)); // Rotate
 	model[2] = rotate(model[2], -0.001f, glm::vec3(0, 1, 0)); // Rotate
-
+	glm::vec3 tempPos = glm::vec3(model[3][3]);
+	//std::cout << std::to_string(tempPos.x) << std::endl << std::to_string(tempPos.y) << std::endl << std::to_string(tempPos.z) << std::endl;
 	if (m_spacePressed)
 	{
 		model[3] = translate(model[3], glm::vec3(0.0, 0.005, -0.02));
+		
 		m_spacePressedTimer--;
 		if (m_spacePressedTimer <= 0)
 		{
+			if (tempPos.x > 4 && tempPos.x <9)
+			{
+				m_scoreText+=5;
+			}
+			else
+			{
+				m_scoreText-=10;
+				m_livesText--;
+			}
+			std::cout << std::to_string(m_scoreText) << std::endl;
+			std::cout << std::to_string(model[3][0][3]) << std::endl;
 			m_spacePressed = false;
 			m_spacePressedTimer = 500;
+			model[3] = mat4{
+				1.0 };
+			model[3] = translate(model[3], glm::vec3(0.0f, -2.0f, 5.0f));
 		}
 	}
+	
 }
 
 void Game::render()
@@ -439,17 +459,37 @@ void Game::render()
 	// Find mouse position using sf::Mouse
 	int x = Mouse::getPosition(window).x;
 	int y = Mouse::getPosition(window).y;
-
-	string hud = "Heads Up Display ["
-		+ string(toString(x))
-		+ "]["
-		+ string(toString(y))
+	string hud;
+	if (m_livesText >= 0)
+	{
+		hud = "Score: ["
+		+ string(toString(m_scoreText))
+		+ "]"
+		+ "\nLives Remaining : ["
+		+ string(toString(m_livesText))
 		+ "]";
+	}
+	else
+	{
+		
+		hud = "Game\nOver";
+	}
+	
 
 	Text text(hud, font);
 
-	text.setColor(sf::Color(255, 255, 255, 170));
-	text.setPosition(50.f, 50.f);
+	if (m_livesText >= 0)
+	{
+		text.setColor(sf::Color(255, 255, 255, 170));
+		text.setPosition(50.f, 50.f);
+	}
+	else
+	{
+		text.setPosition(350.f, 50.f);
+		m_gameOverTimer--;
+		
+	}
+	
 
 	window.draw(text);
 

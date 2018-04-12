@@ -1,11 +1,11 @@
 ﻿  Game.cpp
-c:\users\gregc\desktop\grego-cubes-master\muddygames-gameplay-programming-i-lab-14-dee54774ae32\sfmlopengl\game.cpp(451): warning C4996: 'sf::Text::setColor': was declared deprecated
+c:\users\c00216328\desktop\project_1-master\project1\sfmlopengl\game.cpp(483): warning C4996: 'sf::Text::setColor': was declared deprecated
   c:\sfml-2.4.2\include\sfml\graphics\text.hpp(177): note: see declaration of 'sf::Text::setColor'
   Generating Code...
-  Compiling...
+  Skipping... (no relevant changes detected)
   Main.cpp
-  Generating Code...
-  SFMLOpenGL.vcxproj -> C:\Users\gregc\Desktop\Grego-cubes-master\MuddyGames-gameplay-programming-i-lab-14-dee54774ae32\Debug\SFMLOpenGL.exe
+  SFMLOpenGL.vcxproj -> C:\Users\C00216328\Desktop\Project_1-master\Project1\Debug\SFMLOpenGL.exe
+  SFMLOpenGL.vcxproj -> C:\Users\C00216328\Desktop\Project_1-master\Project1\Debug\SFMLOpenGL.pdb (Partial PDB)
   C:\SFML-2.4.2\bin\openal32.dll
   C:\SFML-2.4.2\bin\sfml-audio-2.dll
   C:\SFML-2.4.2\bin\sfml-audio-d-2.dll
